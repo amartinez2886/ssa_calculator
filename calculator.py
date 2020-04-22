@@ -162,6 +162,7 @@ class CalcRib(Calculate):
                 fra_month = fra_month - 1
                 if fra_month < 1:
                     fra_month = 12
+                    fra_year = fra_year - 1
 
         return fra_month, fra_year
 
