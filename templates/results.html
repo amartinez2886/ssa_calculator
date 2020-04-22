@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <style media="screen">
+
+        body {
+            font-family: Helvetica Neue, sans-serif;
+            width: 90%;
+
+        }
+
+        .container {
+            border: 1px solid white;
+            width: 100%;
+            margin: auto;
+
+        }
+
+        .container table {
+            margin: 50px auto;
+
+        }
+
+        .bene {
+            text-align: center;
+            background-color: #00295C;
+
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        th {
+        padding: 15px;
+        color: white;
+        }
+
+        td {
+            border-top: 1px solid grey;
+            background-color: antiquewhite;
+            padding: 10px;
+
+        }
+
+        td:nth-of-type(1) {
+            width: 100px;
+
+        }
+
+        td:hover {
+            background-color: orange;
+        }
+
+
+
+        .result-box {
+            width: 40%;
+            border: 3px solid #00295C;
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: antiquewhite;
+
+        }
+
+
+        .bene.center.rib {
+            float: left;
+            width: 50%;
+            margin: auto;
+
+        }
+
+        .bene.center.drc {
+            width: 50%;
+            margin: auto;
+
+        }
+
+    </style>
+    <style media="print">
+        @page { size: auto;  margin: 0mm; }
+        .container {
+            border: 1px solid white;
+            width: 90%;
+            margin: auto;
+
+        }
+
+<!--                td:nth-of-type(1) {-->
+<!--            width: 100px;-->
+
+<!--        }-->
+
+                .container table {
+            margin: 30px auto;
+            text-align: center;
+
+        }
+
+        .bene {
+            background-color: #00295C;
+
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        th {
+<!--        padding: 5px;-->
+        color: white;
+        }
+
+        td {
+            border-top: 1px solid grey;
+            background-color: antiquewhite;
+<!--            padding: 5px;-->
+            font-size: 0.9em;
+
+        }
+        .bene.center.rib {
+            float: left;
+            width: 45%;
+            margin: auto;
+
+        }
+
+        .bene.center.drc {
+            margin: auto;
+            width: 45%;
+
+
+        }
+
+         .result-box {
+            width: 40%;
+            border: 3px solid #00295C;
+            text-align: center;
+            margin: 50px auto;
+            padding: 20px;
+            font-size: 1.2em;
+
+        }
+
+    </style>
+</head>
+<body>
+  <h1>Benefits Calculator</h1>
+  <div class="container">
+          {% if bics == 'a' and num_of_rf > 0%}
+          <table class="bene center rib">
+              <thead>
+                <tr>
+                    <th scope="col">RF</th>
+                    <th scope="col">Month & Year</th>
+                    <th scope="col">{{ title }}</th>
+                </tr>
+            </thead>
+                      <tbody>
+            {% for i, mba in zip(range(num_of_rf + 1),calc_selected) %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{month_and_year[i]}}</td>
+                <td>{{mba}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+      {% elif bics == 'b' or bics == 'd' or bics == 'dual_ab' %}
+    <table class="bene center">
+        <thead>
+            <tr>
+                <th scope="col">RF</th>
+                <th scope="col">Month & Year</th>
+                <th scope="col">{{ title }}</th>
+                {% if bics == 'dual_ab' %}
+                  <th scope="col">Aux Spo MBA</th>
+                  <th scope="col">Total MBA</th>
+                {% endif %}
+            </tr>
+        </thead>
+
+          {% if bics == 'b' or bics == 'd' %}
+        <tbody>
+            {% for i, mba in zip(range(num_of_rf + 1),calc_selected) %}
+            <tr>
+            <td>{{i}}</td>
+            <td>{{month_and_year[i]}}</td>
+            <td>{{mba}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          {% elif bics == 'dual_ab'%}
+        <tbody>
+            {% for i, rib_mba, aux_spo_portion, total_spo_mba in zip(range(num_of_rf + 1), rib_calc, portion, spo_calc) %}
+            <tr>
+            <td>{{i}}</td>
+            <td>{{month_and_year[i]}}</td>
+            <td>{{rib_mba}}</td>
+            <td>{{aux_spo_portion}}</td>
+            <td>{{total_spo_mba}}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        {% endif %}
+    </table>
+      {% endif %}
+            {% if bics == 'a'%}
+          <table id="move-center" class="bene center drc">
+        <thead>
+            <tr>
+                  <th scope="col">DRCs</th>
+                  <th scope="col">Month/Year</th>
+                  <th scope="col">DRCs amount</th>
+                  <th scope="col">Effective</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for j , drcs_mba in zip(range(max_drcs + 1), drcs_mba_calculated)%}
+        <tr>
+                <td>{{ j }}</td>
+                <td>{{month_year_drcs[j]}}</td>
+                <td>{{ drcs_mba_calculated[j] }}</td>
+            <td>{{message[j]}}</td>
+
+            </tr>
+        {% endfor %}
+              </tbody>
+          </table>
+              {% endif %}
+              {% if bics == "w" %}
+          <div class="result-box">
+                <p>{{ calc_selected }}</p>
+          </div>
+              {% endif %}
+              <div class="clear"></div>
+      </div>
+
+</body>
+</html>

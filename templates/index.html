@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SSA Benefits Calculator</title>
+    <style media="screen">
+
+    body {
+        font-family: Helvetica Neue, sans-serif;
+
+    }
+
+    input[type='text'], select {
+        background-color: antiquewhite;
+
+    }
+
+    .form-wrapper {
+        text-align: center;
+        padding: 5%;
+        width: 50%;
+        margin: 30px auto;
+    }
+
+    input[type='text'] {
+        text-align: center;
+    }
+    .form-field {
+        padding-bottom: 18px;
+    }
+        .form-field label {
+        display: block;
+        }
+
+        .form-field #test label {
+            display: inline;
+        }
+        #dob-label label {
+            display: inline;
+            padding: 25px;
+        }
+
+        .rib-field, .spouse-field, .dnh-field, .rd-rib, .prot-month-field, .rib-lim-ques, .gp-ques, .gp-amt {
+            display: none
+        }
+
+        #submit, #reset {
+            background-color: #05c;
+            border-color: #05c;
+            display: inline-block;
+            color: #fff;
+            padding: 0.7rem 1.2rem;
+            min-width: 4rem;
+            cursor: pointer;
+            outline: none;
+        }
+
+
+    </style>
+    <script defer src="./static/jquery.js"></script>
+    <script defer src="./static/script22.js"></script>
+    <script defer src="./static/numeric.js"></script>
+</head>
+<body>
+
+<div class="form-wrapper">
+  <h1 class="title">Benefits Calculator</h1>
+  <form action="{{url_for('results')}}" target="_blank">
+      <div class="form-field">{{ form.type_comp.label }} {{ form.type_comp }}</div>
+      <div class="form-field"><div id="dob-label">{{ form.month.label }}{{ form.day.label }} {{ form.year.label }}</div> {{ form.month }} {{ form.day }} {{ form.year }}</div>
+      <div class="form-field rib-field">{{ form.rib_pia.label }}{{form.rib_pia(class_="numeric")}}</div>
+      <div class="form-field spouse-field">{{ form.spouse_nh_pia.label }}{{form.spouse_nh_pia(class_="numeric")}}</div>
+      <div class="form-field dnh-field">{{ form.deceased_nh_pia.label }}{{form.deceased_nh_pia(class_="numeric")}}</div>
+      <div class="form-field">{{ form.prot_date.label }} {{ form.prot_date }}</div>
+      <div class="form-field prot-month-field">{{ form.prot_month.label }} {{ form.prot_month }}</div>
+      <div class="form-field rib-lim-ques">{{ form.rib_lim.label }} {{ form.rib_lim }}</div>
+      <div class="form-field rd-rib">{{ form.reduced_nh_mba.label }}{{form.reduced_nh_mba(class_="numeric")}}</div>
+      <div class="form-field gp-ques">{{ form.gp_ques.label }}{{form.gp_ques }}</div>
+      <div class="form-field gp-amt">{{ form.gp_amt.label }}{{form.gp_amt(class_="numeric")}}</div>
+      {{ form.submit(class_="button") }}
+      <input id="reset" type="reset" value="Reset">
+  </form>
+</div>
+</body>
+</html>

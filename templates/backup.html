@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+    <style>
+
+        body {
+            font-family: Helvetica Neue, sans-serif;
+            width: 100%;
+
+
+        }
+        .container {
+            border: 1px solid white;
+            width: 50%;
+            margin: auto;
+
+        }
+
+        .container table {
+            margin-top: 50px;
+<!--            margin-left: auto;-->
+
+        }
+
+        .bene {
+            text-align: center;
+            background-color: #00295C
+
+        }
+
+        h1 {
+          text-align: center;
+        }
+
+        th {
+        padding: 15px;
+        color: white;
+        }
+
+        td {
+            border-top: 1px solid grey;
+            background-color: antiquewhite;
+            padding: 15px;
+
+        }
+
+        td:nth-of-type(1) {
+            width: 100px;
+
+        }
+
+        td:hover {
+            background-color: orange;
+        }
+
+
+
+        .result-box {
+            width: 40%;
+            border: 1px solid black;
+            text-align: center;
+            margin: 50px auto;
+
+        }
+
+        table:first-child, table:nth-of-type(2) {
+            float: left;
+        }
+
+        .clear {
+
+            clear: both;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+  <h1>Benefits Calculator</h1>
+  <div class="container">
+      <div class="left">
+      {% if bics == 'a' or bics == 'b' or bics == 'd' or bics == 'dual_ab' %}
+    <table class="bene center">
+        <thead>
+            <tr>
+                <th scope="col">RF</th>
+                <th scope="col">Month & Year</th>
+                <th scope="col">{{ title }}</th>
+                {% if bics == 'dual_ab' %}
+                  <th scope="col">Aux Spo MBA</th>
+                  <th scope="col">Total MBA</th>
+            </tr>
+        </thead>
+        {% endif %}
+        <tbody>
+          {% if bics == 'a' %}
+            {% for i, mba in zip(range(num_of_rf + 1),calc_selected) %}
+            <tr>
+                <td>{{i}}</td>
+                <td>{{month_and_year[i]}}</td>
+                <td>{{mba}}</td>
+            </tr>
+            {% endfor %}
+          {% elif bics == 'b' or bics == 'd' %}
+            {% for i, mba in zip(range(num_of_rf + 1),calc_selected) %}
+            <tr>
+            <td>{{i}}</td>
+            <td>{{month_and_year[i]}}</td>
+            <td>{{mba}}</td>
+            </tr>
+            {% endfor %}
+          {% elif bics == "w" %}
+          <div class="result-box">
+                <p>{{ calc_selected }}</p>
+          </div>
+          {% elif bics == 'dual_ab'%}
+            {% for i, rib_mba, aux_spo_portion, total_spo_mba in zip(range(num_of_rf + 1), rib_calc, portion, spo_calc) %}
+            <tr>
+            <td>{{i}}</td>
+            <td>{{month_and_year[i]}}</td>
+            <td>{{rib_mba}}</td>
+            <td>{{aux_spo_portion}}</td>
+            <td>{{total_spo_mba}}</td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+      {% endif %}
+            {% if bics == 'a'%}
+          <table class="bene center drc">
+        <thead>
+            <tr>
+                  <th scope="col">DRCs</th>
+                  <th scope="col">Month/Year</th>
+                  <th scope="col">DRCs amount</th>
+                  <th scope="col">Payable</th>
+            </tr>
+        </thead>
+<!--    {% endif %}-->
+
+<!--              {% if bics == 'a'%}-->
+
+        <tbody>
+        {% for j , drcs_mba in zip(range(max_drcs + 1), drcs_mba_calculated)%}
+        <tr>
+                <td>{{ j }}</td>
+                <td>{{month_year_drcs[j]}}</td>
+                <td>{{ drcs_mba_calculated[j] }}</td>
+            <td>{{message1[j]}}</td>
+
+            </tr>
+        {% endfor %}
+              </tbody>
+
+          </table>
+          {% endif %}
+            <div class="clear"></div>
+  </div>
+      </div>
+
+</body>
+</html>
