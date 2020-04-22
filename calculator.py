@@ -267,7 +267,84 @@ class CalcRib(Calculate):
         max_drcs, current_drcs = self.calc_drcs()
         drc_amounts = []
 
-        if self.year >= 1943:
+        if self.year <= 1916:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * drcs) / 1200)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif 1916 < self.year <= 1924:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * drcs) / 400)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1925 or self.year == 1926:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 7 * drcs) / 2400)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1927 or self.year == 1928:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * drcs) / 300)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1929 or self.year == 1930:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 3 * drcs) / 800)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1931 or self.year == 1932:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 5 * drcs) / 1200)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1933 or self.year == 1934:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 11 * drcs) / 2400)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1935 or self.year == 1936:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * drcs) / 200)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1937 or self.year == 1938:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 13 * drcs) / 2400)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1939 or self.year == 1940:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 7 * drcs) / 1200)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year == 1941 or self.year == 1942:
+            for drcs in range(max_drcs + 1):
+                drc_formula = "{:.3f}".format(self.pia + (self.pia * 5 * drcs) / 800)
+                total = str(drc_formula)[:-2] + "0"
+                drc_amounts.append(total)
+            return drc_amounts
+
+        elif self.year >= 1943:
             for drcs in range(max_drcs + 1):
                 drc_formula = "{:.3f}".format(self.pia + (self.pia * 2 * drcs) / 300)
                 total = str(drc_formula)[:-2] + "0"
